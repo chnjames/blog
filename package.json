@@ -8,10 +8,11 @@
     "docs:build": "vuepress build docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "'chnjames' <'chnrural910@gmail.com'>",
   "license": "ISC",
   "devDependencies": {
     "vuepress": "^2.0.0-beta.39",
     "vuepress-theme-vue": "^1.1.1"
-  }
+  },
+  "repository": "https://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@github.com/chnjames/chnjames.git"
 }
