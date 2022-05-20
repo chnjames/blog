@@ -7,6 +7,8 @@ module.exports = {
   title: '一点一木前端进阶',
   description: '高级前端进阶之路',
   logo: '/images/hero.png',
+  contributorsText: '贡献者',
+  lastUpdatedText: '上次更新',
   plugins: [
     nprogressPlugin(),
     '@vssue/vuepress-plugin-vssue', {
