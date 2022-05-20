@@ -7,8 +7,14 @@ module.exports = {
     ],
     '/reference/': [
         {
-            text: 'Reference',
-            children: ['/reference/cli.md', '/reference/config.md']
+            text: '调用堆栈',
+            children: ['/reference/README.md', '/reference/cli.md', '/reference/config.md']
+        }
+    ],
+    '/topic/': [
+        {
+            text: '壹题汇总',
+            children: ['/topic/README.md', '/reference/cli.md']
         }
     ]
 }

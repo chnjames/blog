@@ -18,6 +18,7 @@
   "repository": "https://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@github.com/chnjames/chnjames.git",
   "dependencies": {
     "@vssue/api-github-v3": "^1.4.7",
+    "@vssue/api-github-v4": "^1.4.7",
     "@vssue/vuepress-plugin-vssue": "^1.4.8"
   }
 }

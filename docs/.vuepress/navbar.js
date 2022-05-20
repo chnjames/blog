@@ -4,9 +4,12 @@ module.exports = [
         link: '/guide/',
     }, {
         text: '进阶·博文',
-        children: ['/reference/cli.md', '/reference/config.md'],
+        link: '/reference/'
     }, {
         text: '每日·壹题',
-        children: ['/group/foo.md', '/group/bar.md'],
+        link: '/topic/'
+    }, {
+        text: 'Github',
+        link: 'https://github.com/chnjames',
     }
 ]
