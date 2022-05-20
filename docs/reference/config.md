@@ -1,1 +1,2 @@
 config
+<Vssue :title="$title" />
