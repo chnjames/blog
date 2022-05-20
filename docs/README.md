@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: '/images/javascript.gif',
+heroImage: /images/javascript.gif,
 actionText: Get Started →
 actionLink: /guide/
 features:
