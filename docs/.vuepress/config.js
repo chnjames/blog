@@ -1,6 +1,9 @@
 const { defaultTheme } = require('@vuepress/theme-default')
 const { nprogressPlugin } = require('@vuepress/plugin-nprogress')
 
+const sidebar = require('./sidebar')
+const navbar = require('./navbar')
+
 module.exports = {
   base: '/blog',
   lang: 'zh-CN',
@@ -22,33 +25,8 @@ module.exports = {
   ],
   theme: defaultTheme({
     // 导航栏配置
-    navbar: [
-      {
-        text: 'Home',
-        link: '/guide/',
-      }, {
-        text: '进阶·博文',
-        children: ['/reference/cli.md', '/reference/config.md'],
-      }, {
-        text: '每日·壹题',
-        children: ['/group/foo.md', '/group/bar.md'],
-      }
-    ],
+    navbar,
     // 侧边栏对象
-    // 不同子路径下的页面会使用不同的侧边栏
-    sidebar: {
-      '/guide/': [
-        {
-          text: 'Guide',
-          children: ['/guide/README.md', '/guide/getting-started.md']
-        }
-      ],
-      '/reference/': [
-        {
-          text: 'Reference',
-          children: ['/reference/cli.md', '/reference/config.md']
-        }
-      ]
-    }
+    sidebar
   })
 }
