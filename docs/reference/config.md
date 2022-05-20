@@ -1,4 +1,5 @@
 ---
 title: 配置页面
 ---
-<Vssue :title="$title" />
+发腮发森奥赛
+<Vssue />
