@@ -9,6 +9,9 @@ module.exports = [
         text: '面试宝典',
         link: '/topic/'
     }, {
+        text: '软件推荐',
+        link: '/software/'
+    }, {
         text: '前方的路',
         link: '/future/'
     }, {
