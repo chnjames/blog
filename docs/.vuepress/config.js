@@ -27,6 +27,7 @@ module.exports = {
     contributorsText: '贡献者',
     lastUpdatedText: '上次更新',
     backToHome: '返回首页',
+    notFound: ['抱歉，找不到该页面！', '老子今天不上班，没时间写这些文章！', '换个地方看看吧！'],
     // 导航栏配置
     navbar,
     // 侧边栏对象
