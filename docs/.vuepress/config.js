@@ -14,7 +14,7 @@ module.exports = {
   description: '高级前端进阶之路',
   logo: '/images/hero.png',
   head: [
-    ['link', { rel: 'icon', href: './images/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/images/favicon.ico' }]
   ],
   plugins: [
     nprogressPlugin(),
