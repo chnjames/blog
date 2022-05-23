@@ -2,7 +2,7 @@
 const { defaultTheme } = require('@vuepress/theme-default')
 const { nprogressPlugin } = require('@vuepress/plugin-nprogress')
 // const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+// const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { path } = require('@vuepress/utils')
 
 const sidebar = require('./sidebar')
@@ -31,7 +31,7 @@ module.exports = {
     '@vuepress/register-components', {
        componentsDir: path.resolve(__dirname, './components')
      },
-    docsearchPlugin({
+    '@vuepress/plugin-docsearch', {
       appId: '6LGAI4WJ6B',
       apiKey: 'e1920962bdda4ae8c65f2a2cc9eee8af',
       indexName: 'vuepress',
@@ -77,7 +77,7 @@ module.exports = {
           }
         }
       }
-    })
+    }
   ],
   theme: defaultTheme({
     // page meta
