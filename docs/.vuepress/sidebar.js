@@ -1,12 +1,4 @@
 module.exports = {
-    // 开始入门
-    '/guide/': [
-        {
-            text: '指南',
-            collapsible: true,
-            children: ['/guide/getting-started.md']
-        }
-    ],
     // 前端进阶
     '/reference/': [
         {
@@ -22,9 +14,9 @@ module.exports = {
     // 面试宝典
     '/topic/': [
         {
-            text: '壹题汇总',
+            text: '原型Prototype',
             collapsible: true,
-            children: ['/reference/base.md']
+            children: ['/topic/prototype.md']
         }
     ],
     // 前方的路
@@ -42,11 +34,7 @@ module.exports = {
     // 个人简介
     '/summary/': [
         {
-            text: '个人荣誉',
-            collapsible: true,
-            children: ['/summary/honor.md']
-        }, {
-            text: '个人荣誉',
+            text: '前路漫漫',
             collapsible: true,
             children: ['/summary/honor.md']
         }
@@ -57,6 +45,10 @@ module.exports = {
             text: '软件推荐',
             collapsible: true,
             children: ['/software/recommend.md']
+        }, {
+            text: '使用教程',
+            collapsible: true,
+            children: ['/software/tutorial.md', '/software/platform.md']
         }
     ]
 }

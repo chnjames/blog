@@ -1,7 +1,7 @@
 module.exports = [
     {
         text: 'Home',
-        link: '/guide/',
+        link: '/'
     }, {
         text: '前端进阶',
         link: '/reference/'
@@ -16,6 +16,6 @@ module.exports = [
         link: '/future/'
     }, {
         text: 'Github',
-        link: 'https://github.com/chnjames',
+        link: 'https://github.com/chnjames'
     }
 ]
