@@ -28,9 +28,9 @@ module.exports = {
     // registerComponentsPlugin({
     //   componentsDir: path.resolve(__dirname, './components'),
     // }),
-    '@vuepress/register-components', {
-       componentsDir: path.resolve(__dirname, './components')
-     },
+    // '@vuepress/register-components', {
+    //    componentsDir: path.resolve(__dirname, './components')
+    //  },
     '@vuepress/plugin-docsearch', {
       appId: '6LGAI4WJ6B',
       apiKey: 'e1920962bdda4ae8c65f2a2cc9eee8af',
