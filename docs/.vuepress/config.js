@@ -1,8 +1,8 @@
 // 配置文件
 const { defaultTheme } = require('@vuepress/theme-default')
 const { nprogressPlugin } = require('@vuepress/plugin-nprogress')
-// const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
-// const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { path } = require('@vuepress/utils')
 
 const sidebar = require('./sidebar')
