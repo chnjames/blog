@@ -9,7 +9,8 @@ module.exports = {
             text: '项目经验',
             collapsible: true,
             children: ['/reference/experience.md']
-        }
+        },
+        '/reference/vite_vue3_ts.md'
     ],
     // 面试宝典
     '/topic/': [

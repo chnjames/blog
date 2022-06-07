@@ -11,6 +11,7 @@
   "author": "'chnjames' <'chnrural910@gmail.com'>",
   "license": "ISC",
   "devDependencies": {
+    "@vuepress/bundler-vite": "^2.0.0-beta.45",
     "@vuepress/plugin-docsearch": "^2.0.0-beta.45",
     "@vuepress/plugin-nprogress": "^2.0.0-beta.45",
     "@vuepress/plugin-register-components": "^2.0.0-beta.45",
