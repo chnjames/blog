@@ -10,7 +10,8 @@ module.exports = {
             collapsible: true,
             children: ['/reference/experience.md']
         },
-        '/reference/vite_vue3_ts.md'
+        '/reference/vite_vue3_ts.md',
+        '/reference/promise.md'
     ],
     // 面试宝典
     '/topic/': [
@@ -49,7 +50,10 @@ module.exports = {
         }, {
             text: '使用教程',
             collapsible: true,
-            children: ['/software/tutorial.md', '/software/platform.md']
+            children: [
+                '/software/tutorial.md',
+                '/software/platform.md'
+            ]
         }
     ]
 }

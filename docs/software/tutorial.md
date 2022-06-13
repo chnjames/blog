@@ -1,4 +1,4 @@
-# 软件使用教程
+# 使用教程
 
 ## Typora+PicGo+Github搭建图床
 
@@ -91,3 +91,64 @@ XMind破解方法：
 
 ![XMind](https://user-images.githubusercontent.com/44110547/134835262-f256e19c-1334-412e-8236-e31bb3a68b89.png)
 
+## NVM：使用nvm安装管理node版本
+
+1. 下载NVM，下载完成后直接安装
+
+   下载地址：https://github.com/coreybutler/nvm-windows/releases/download/1.1.9/nvm-setup.exe
+
+2. 安装成功后，执行该命令，查看安装版本
+
+   ```shell
+   nvm v
+   // 或
+   nvm version 
+   ```
+
+   
+
+   ![image-20220609100338028](https://raw.githubusercontent.com/chnjames/cloudImg/main/blog/202206091003956.png)
+
+3. 常用命令
+
+   - nvm ls 查看已经安装的所有nodejs版本
+   - nvm install 版本号，可安装指定版本的nodejs
+   - nvm use 版本号，即可切换到指定版本
+   - nvm uninstall 版本号，卸载指定版本
+
+4. node安装
+
+   ```shell
+   // 安装最新版本
+   nvm install node
+   // 安装指定版本(推荐)
+   nvm install 14.18.0
+   // 安装指定版本，指定操作系统位数(32/64),不指定使用系统默认
+   nvm install 14.18.0 64
+   ```
+
+   
+
+5. 查看已安装node版本
+
+   ```shell
+   nvm ls
+   // 或
+   nvm list
+   ```
+
+   
+
+6. 使用指定版本node
+
+   ```shell
+   // 14.18.0 是版本号
+   nvm use 14.18.0
+   
+   // 指定操作系统位数(32/64)，不指定使用系统默认
+   nvm use 14.18.0 64
+   ```
+
+   
+
+7. 

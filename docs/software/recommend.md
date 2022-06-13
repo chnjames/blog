@@ -1,4 +1,4 @@
-# Windows软件推荐
+# 软件推荐
 ## Snipaste
 
 ### 使用 Snipaste 提高您的工作效率
