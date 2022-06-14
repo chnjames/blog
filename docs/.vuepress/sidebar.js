@@ -11,7 +11,8 @@ module.exports = {
             children: ['/reference/experience.md']
         },
         '/reference/vite_vue3_ts.md',
-        '/reference/promise.md'
+        '/reference/promise.md',
+        '/reference/class.md'
     ],
     // 面试宝典
     '/topic/': [
