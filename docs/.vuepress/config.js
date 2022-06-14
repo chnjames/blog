@@ -1,10 +1,12 @@
 // 配置文件
 const { defaultTheme } = require('@vuepress/theme-default')
 const { nprogressPlugin } = require('@vuepress/plugin-nprogress')
-// const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
-// const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+const { viteBundler } = require('@vuepress/bundler-vite')
+const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { path } = require('@vuepress/utils')
-
+const { localTheme } = require('./theme')
 const sidebar = require('./sidebar')
 const navbar = require('./navbar')
 
@@ -14,8 +16,20 @@ module.exports = {
   description: '高级前端进阶之路',
   logo: '/images/hero.png',
   head: [
-    ['link', { rel: 'icon', href: '/images/favicon.ico' }]
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: `/images/favicon.png`
+      }
+    ]
   ],
+  bundler: viteBundler({
+    viteOptions: {},
+    vuePluginOptions: {},
+  }),
   plugins: [
     nprogressPlugin(),
     '@vssue/vuepress-plugin-vssue', {
@@ -25,13 +39,13 @@ module.exports = {
       clientId: 'fc6109bbcae36ff80c0c',
       clientSecret: 'd06512d022ff2dea3f700b6002fd1273c56983d0'
     },
-    // registerComponentsPlugin({
-    //   componentsDir: path.resolve(__dirname, './components'),
-    // }),
-    '@vuepress/register-components', {
-       componentsDir: path.resolve(__dirname, './components')
-     },
-    '@vuepress/plugin-docsearch', {
+    googleAnalyticsPlugin({
+      id: 'G-PF50YMCFTR'
+    }),
+    registerComponentsPlugin({
+      componentsDir: path.resolve(__dirname, './components'),
+    }),
+    docsearchPlugin({
       appId: '6LGAI4WJ6B',
       apiKey: 'e1920962bdda4ae8c65f2a2cc9eee8af',
       indexName: 'vuepress',
@@ -77,9 +91,16 @@ module.exports = {
           }
         }
       }
-    }
+    })
   ],
-  theme: defaultTheme({
+  theme: localTheme({
+    vssueConfig: {
+      platform: 'github-v4',
+      owner: 'chnjames',
+      repo: 'blog',
+      clientId: 'fc6109bbcae36ff80c0c',
+      clientSecret: 'd06512d022ff2dea3f700b6002fd1273c56983d0'
+    },
     // page meta
     editLinkText: '在 GitHub 上编辑此页',
     contributorsText: '贡献者',
@@ -100,6 +121,7 @@ module.exports = {
     openInNewWindow: '在新窗口打开',
     toggleDarkMode: '切换夜间模式',
     toggleSidebar: '切换侧边栏',
+    sidebarDepth: 2,
     // 导航栏配置
     navbar,
     // 侧边栏对象
