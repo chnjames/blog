@@ -4,7 +4,6 @@ const { nprogressPlugin } = require('@vuepress/plugin-nprogress')
 const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { viteBundler } = require('@vuepress/bundler-vite')
-const { googleAnalyticsPlugin } = require('@vuepress/plugin-google-analytics')
 const { path } = require('@vuepress/utils')
 const { localTheme } = require('./theme')
 const sidebar = require('./sidebar')
@@ -16,15 +15,19 @@ module.exports = {
   description: '高级前端进阶之路',
   logo: '/images/hero.png',
   head: [
-    [
-      'link',
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '16x16',
-        href: `/images/favicon.png`
-      }
-    ]
+    ['link', {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: `/images/favicon.png`
+    }],
+    ['script', {
+      async: true,
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-PF50YMCFTR'
+    }],
+    ['script', {}, [
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-PF50YMCFTR');",
+    ]]
   ],
   bundler: viteBundler({
     viteOptions: {},
@@ -39,9 +42,6 @@ module.exports = {
       clientId: 'fc6109bbcae36ff80c0c',
       clientSecret: 'd06512d022ff2dea3f700b6002fd1273c56983d0'
     },
-    googleAnalyticsPlugin({
-      id: 'G-PF50YMCFTR'
-    }),
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './components'),
     }),
