@@ -17,9 +17,7 @@ module.exports = {
   head: [
     ['link', {
       rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      href: '/favicon.png'
+      href: 'https://raw.githubusercontent.com/chnjames/cloudImg/main/blog/202206141707606.png'
     }],
     ['script', {
       async: true,
