@@ -19,7 +19,7 @@ module.exports = {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      href: `/images/favicon.png`
+      href: '/images/favicon.png'
     }],
     ['script', {
       async: true,

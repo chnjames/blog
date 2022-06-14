@@ -1,7 +1,7 @@
 <template>
    <div @click="getRegeo" v-if="weather.weatherIcon" class="weather"
       :style="`color: rgb(${convartedColor[0]}, ${convartedColor[1]}, ${convartedColor[2]})`">
-      <img class="weather-icon" :src="weather.weatherIcon" alt="weather.weather" />
+      <img class="weather-icon" :src="$withBase(weather.weatherIcon)" alt="weather.weather" />
       <div class="weather-layout">
          <div class="weather-city">{{ position.province }}{{ position.city }}{{ position.district }}</div>
          <div class="weather-detail">{{ weather.weather }} / {{ weather.temperature }}℃</div>
