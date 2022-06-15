@@ -44,9 +44,9 @@ module.exports = {
       componentsDir: path.resolve(__dirname, './components'),
     }),
     docsearchPlugin({
-      appId: '6LGAI4WJ6B',
-      apiKey: 'e1920962bdda4ae8c65f2a2cc9eee8af',
-      indexName: 'vuepress',
+      appId: 'I6ZHGXX76R',
+      apiKey: 'a5cde8be8e2af0341e2a6e03f8237ff2',
+      indexName: 'chnjas',
       searchParameters: {
         facetFilters: ['tags:v2']
       },
@@ -92,13 +92,6 @@ module.exports = {
     })
   ],
   theme: localTheme({
-    vssueConfig: {
-      platform: 'github-v4',
-      owner: 'chnjames',
-      repo: 'blog',
-      clientId: 'fc6109bbcae36ff80c0c',
-      clientSecret: 'd06512d022ff2dea3f700b6002fd1273c56983d0'
-    },
     // page meta
     editLinkText: '在 GitHub 上编辑此页',
     contributorsText: '贡献者',
