@@ -47,9 +47,8 @@ module.exports = {
       appId: 'I6ZHGXX76R',
       apiKey: 'a5cde8be8e2af0341e2a6e03f8237ff2',
       indexName: 'chnjas',
-      searchParameters: {
-        facetFilters: ['tags:v2']
-      },
+      container: '.search-box',
+      debug: false,
       placeholder: '搜索文档',
       translations: {
         button: {
