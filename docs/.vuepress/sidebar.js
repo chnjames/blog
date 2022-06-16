@@ -55,6 +55,7 @@ module.exports = {
                 '/software/tutorial.md',
                 '/software/platform.md'
             ]
-        }
+        },
+        '/software/GithubCopilot.md'
     ]
 }
