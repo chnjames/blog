@@ -10,6 +10,7 @@ module.exports = {
             collapsible: true,
             children: ['/reference/experience.md']
         },
+        '/reference/vue3.md',
         '/reference/vite_vue3_ts.md',
         '/reference/promise.md',
         '/reference/class.md'
