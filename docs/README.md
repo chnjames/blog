@@ -2,7 +2,7 @@
 home: true
 heroImage: /images/front-end.gif
 actions:
-  - text: 起步 →
+  - text: 开始使用
     link: /reference/
     type: primary
   - text: 个人简介
