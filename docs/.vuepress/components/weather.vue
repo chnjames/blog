@@ -100,9 +100,9 @@ let convartColor = () => {
 
 <style lang="scss" scoped>
 .weather {
-   position: fixed;
-   right: 10px;
-   top: 60px;
+   position: absolute;
+   left: 10px;
+   bottom: 10px;
    z-index: 10;
    display: flex;
    align-items: center;
@@ -111,6 +111,7 @@ let convartColor = () => {
    padding: 5px 10px;
    border-radius: 20px;
    box-shadow: 1px 1px 10px rgb(0 0 0 / .3);
+   background-color: #fff;
    &-icon {
       width: 30px;
       display: block;
