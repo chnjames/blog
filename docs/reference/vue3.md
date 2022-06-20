@@ -1,18 +1,5 @@
 # Vue3 新特性及使用经验总结
 
-## Fragments（碎片、片段）
-
-作为`Vue@3.x`的新特性之一，允许一个`Vue`组件可以有多个根节点。
-
-```vue
-<!-- Layout.vue -->
-<template>
-  <header>...</header>
-  <main v-bind="$attrs">...</main>
-  <footer>...</footer>
-</template>
-```
-
 ## Composition API
 
 ### setup
@@ -105,7 +92,7 @@ const say = () => {
 
 > 从`Vue@2.6.x`开始，Vue 为具名和范围插槽引入了一个全新的语法，即`v-slot` 指令。目的就是想统一 `slot` 和 `scope-slot` 语法，使代码更加规范和清晰。在 `vue@3.x`中，只能使用`v-slot`。
 
-### `reactive`、`ref`与`toRefs`
+### `reactive`、`ref`、`toRefs`和`toRef`
 
 在`vue@3.x`使用`reactive`和`ref`来进行响应式数据定义。
 
@@ -130,15 +117,28 @@ const say = () => {
 
 `toRefs`用于将一个`reactive`对象转化为属性全部为`ref`对象的普通对象。
 
+#### `toRef`
+
+`ToRef`用于将一个`reactive`对象里面的单个属性转化为`ref`对象的普通对象。而且它既保留了响应式，也保留了引用，也就是说从`reactive`复制过来的属性进行修改后，除了视图会更新，原有`reactive`里面对应的值也会跟着更新。
+
+> `template`访问`toRefs`的值，需要带上`.value`，如果不带，就会出现双引号。
+>
+> `template`访问`toRef`的值，不需要带上`.value`。
+
 ```vue
 <template>
   <p>第 {{ year }} 年</p>
   <p>姓名： {{ nickname }}</p>
+  <p>姓名修改：{{ refsUser.nickname.value }}</p>
   <p>年龄： {{ age }}</p>
+  <p>姓名修改：{{toRefNickName}}</p>
+  <div>----------------------------</div>
+  <p>人名：{{ personName }}</p>
+  <p>人性别：{{ personGender }}</p>
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from "vue"
+import { reactive, ref, toRefs, toRef } from "vue"
 const year = ref(0)
 /**
  * reactive、ref定义和修改对象的区别
@@ -150,8 +150,12 @@ const user = reactive({
   gender: "女"
 })
 const {nickname, age} = toRefs(user)
+const refsUser = toRefs(user)
+const toRefNickName = toRef(user, 'nickname')
 setTimeout(() => {
   user.gender = "男"
+  refsUser.nickname.value = '小明'
+  // toRefNickName.value = 'Janna'
 }, 1000)
 // 使用ref定义对象
 const person = ref({
@@ -159,7 +163,7 @@ const person = ref({
   personAge: 27,
   personGender: "男"
 })
-const {personName, personAge} = toRefs(user.value)
+const {personName, personGender} = toRefs(person.value)
 setTimeout(() => {
   person.value.personGender = "女"
 }, 1000)
@@ -168,6 +172,222 @@ setTimeout(() => {
 ```
 
 
+
+### `watch`、`watchEffect`和`computed`
+
+#### `watch`
+
+`watch`函数用来侦听特定的数据源，并执行回调函数。默认情况下是惰性的，也就是说仅在侦听的源数据变更时才执行回调。
+
+> `watch(source, callback, [options])`
+>
+> 参数说明：
+>
+> - `source`：可以支持`String`、`Object`、`Function`和`Array`，用于指定要侦听的响应式变量。
+> - `callback`：执行的回调函数。
+> - `options`：支持`deep`、`immediate`和`flush`选项。
+
+```vue
+<template>
+  <p>姓名： {{ nickname }}</p>
+  <p>世纪：{{ year }}</p>
+</template>
+
+<script setup>
+import { reactive, toRefs, watch, ref } from "vue"
+const year = ref(1000)
+const user = reactive({
+  nickname: "xiaofan",
+  age: 26,
+  gender: "女"
+})
+const { nickname } = toRefs(user)
+setTimeout(() => {
+  nickname.value = "James"
+  year.value = 2022
+}, 1000)
+// 侦听reactive定义的数据
+watch(nickname, (newVal, oldVal) => {
+  console.log('newVal:', newVal, 'oldVal', oldVal)
+})
+watch(() => user.nickname, (newVal, oldVal) => {
+  console.log('newVal:', newVal, 'oldVal', oldVal)
+})
+// 侦听ref定义的数据
+watch(year, (newVal, oldVal) => {
+  console.log('newVal:', newVal, 'oldVal', oldVal)
+})
+// 侦听多个数据
+watch([year, () => user.nickname], ([yearNewVal, nickNewVal], [yearOldVal, nickOldVal]) => {
+  console.log('yearNewVal:', yearNewVal, 'nickNewVal', nickNewVal)
+  console.log('yearOldVal:', yearOldVal, 'nickOldVal', nickOldVal)
+})
+// 侦听复杂的嵌套对象
+/**
+ * 第三个参数：
+ *  deep: true，表示深度侦听
+ *  immediate: true，表示立即触发一次侦听
+ */
+const room = reactive({
+  id: 100,
+  attrs: {
+    size: "140平方米",
+    type: "三室两厅"
+  },
+})
+setTimeout(() => {
+  room.attrs.size = "200平方米"
+}, 2000)
+watch(() => room.attrs, (newVal, oldVal) => {
+  console.log('侦听复杂的嵌套对象', 'newVal:', newVal, 'oldVal', oldVal)
+}, {
+  deep: true
+})
+
+</script>
+```
+
+
+
+> 在监听`reactive`定义的响应式数据时，`oldVal`无法正确获取，并且强制开启深度监听（`deep: true`），并且无法关闭。
+
+##### `stop`停止监听
+
+在组件中创建的`watch`监听，会在组件被销毁时自动停止。如果在组件销毁之前想要停止某个监听，可以调用`watch()`函数的返回值。
+
+```vue
+<template>
+  <p>姓名： {{ nickname }}</p>
+</template>
+
+<script setup>
+import { reactive, toRefs, watch } from "vue"
+const user = reactive({
+  nickname: "xiaofan",
+  age: 26,
+  gender: "女"
+})
+const { nickname } = toRefs(user)
+setInterval(() => {
+  nickname.value += "James"
+}, 2000)
+const stopWatchNick = watch(nickname, (newVal, oldVal) => {
+  console.log('newVal:', newVal, 'oldVal', oldVal)
+})
+// stop停止监听
+setTimeout(() => {
+  stopWatchNick()
+}, 7000)
+
+</script>
+```
+
+
+
+#### `watchEffect`
+
+`watchEffect`是`vue@3.x`的新函数，它会自动收集依赖，只要指定一个回调函数。在组件初始化时，会先执行一次来收集依赖，然后当收集到的依赖中数据发生变化时，就会再次执行回调函数。
+
+- `watchEffect`不需要手动传入依赖
+- `watchEffect`会先执行一次用来自动收集依赖（自动默认开启：`immediate: true`）
+- `watchEffect`无法获取到变化前的值，只能获取到变化后的值
+
+```vue
+<template>
+  <h3>{{name}}</h3>
+  <h3>{{year}}</h3>
+</template>
+<script setup>
+import { watchEffect, reactive, toRefs, ref } from 'vue';
+const year = ref(2022)
+const obj = reactive({
+  name: 'James',
+  age: 18
+})
+setInterval(() => {
+  obj.name = 'James' + Math.random();
+  year.value = 2020 + Math.random() * 10;
+}, 1000)
+watchEffect(() => {
+  console.log(obj.name);
+})
+const {name} = toRefs(obj)
+</script>
+```
+
+
+
+#### `computed`
+
+```vue
+<template>
+ <input type="text" placeholder="请输入姓" v-model="user.familyName" />
+ <input type="text" placeholder="请输入名" v-model="user.lastName" />
+ <h3>姓名：{{fullName}}</h3>
+</template>
+<script setup>
+import { reactive, computed } from 'vue';
+const user = reactive({
+  familyName: '',
+  lastName: ''
+})
+const fullName = computed(() => {
+  return `${user.familyName} ${user.lastName}`
+})
+</script>
+```
+
+
+
+## 自定义`Hooks`
+
+`vue@3.x`中的自定义`Hooks`函数相当于`vue@2.x`中的`mixin`，不同的是`hooks`是函数；它可以帮助我们提高代码的复用性，让我们能在不同的组件中都利用`hooks`函数。一般约定自定义`Hooks`以`use`作为前缀，和普通函数加以区分。
+
+```javascript
+import { computed, ref } from "vue"
+const useCount = (initValue = 1) => {
+    const count = ref(initValue)
+    const multiple = computed(() => count.value * 2)
+    const increase = () => count.value++
+    const decrease = () => count.value--
+    return {
+        count,
+        multiple,
+        increase,
+        decrease
+    }
+}
+export default useCount
+```
+
+
+
+```vue
+<template>
+  <h3>{{count}}</h3>
+  <h3>{{multiple}}</h3>
+  <button @click="increase">加</button>
+  <button @click="decrease">减</button>
+</template>
+<script setup>
+import useCount from '@/hooks/useCount';
+const { count, multiple, increase, decrease } = useCount(100);
+</script>
+```
+
+
+
+## `vue@2.x`与`vue@3.x`响应式对比
+
+`vue@3.x`：`Proxy` --- `vue@2.x`：`Object.defineProperty`
+
+- `Object.defineProperty`只能劫持对象的属性，而`Proxy`是直接代理对象。
+
+  由于`Object.defineProperty`只能劫持对象属性，需要遍历对象的每一个属性，如果属性值也是对象，就需要递归进行深度遍历。但是`Proxy`直接代理对象，不需要遍历操作。
+
+- `Object.defineProperty`对新增属性需要手动进行`Observe`。
+
+  因为`Object.defineProperty`劫持的是对象的属性，所以新增属性时，需要重新遍历对象，对其新增属性再次使用`Object.defineProperty`进行劫持。也就是`vue@2.x`中给数组和对象新增属性时，需要使用`$set`才能保证新增的属性也是响应式的，`$set`内部也是通过调用`Object.defineProperty`去处理的。
 
 ## 生命周期钩子
 
@@ -184,3 +404,44 @@ setTimeout(() => {
 `inRenderTriggered`他不会跟踪每一个值，而是给你变量值的信息，并且信值和旧值都会给你明确的展示出来。生成的`event`对象其中包含`key`（哪边变量发生了变化）、`newValue`（更新后变量的值）、`oldValue`（更新前变量的值）和`target`（目前页面中的响应变量和函数）。
 
 `onErrorCaptured`它会捕获子孙组件的异常报错，可以在这个函数中自定义处理错误信息。如果`onErrorCaptured`钩子自身抛出了一个错误，那么这个新的错误和原本捕获到的错误都会发送给全局的`config.errorHandle`。
+
+## Fragment（碎片、片段）
+
+作为`Vue@3.x`的新特性之一，它的意思就相当于创建页面时，自动创建个虚拟根标签`VNode`，所以可以不要根标签，也就是说允许一个`Vue`组件可以有多个根节点。好处就是**减少标签层级，减小内存占用**。
+
+```vue
+<!-- Layout.vue -->
+<template>
+  <header>...</header>
+  <main v-bind="$attrs">...</main>
+  <footer>...</footer>
+</template>
+```
+
+
+
+## Teleport
+
+**即希望继续在组件内部使用，又希望渲染的DOM结构不嵌套在组件的DOM中。**
+
+可以定义`teleport`在任意标签里进行定位等（常见操作为模态框），除了`body`，还可以写`css`选择器（`id`，`class`）。
+
+`to`属性与需要绑定的选择器保持一致。
+
+```vue
+<template>
+  <teleport to="#app">
+    <div class="dialog">
+      直接定位在顶级#app选择器上
+    </div>
+  </teleport>
+</template>
+<script setup>
+import { ref } from 'vue';
+const title = ref('标题');
+</script>
+```
+
+## Suspense
+
+`Suspense`是一个特殊组件，它会有两个`template slot`，刚开始会渲染`feedback`内容，知道`达到某个条件以后`，才会渲染正式的内容，也就是`default`的内容。如果使用`Suspense`，要返回一个`promise`而不是一个对象。
