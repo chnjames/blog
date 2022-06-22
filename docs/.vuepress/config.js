@@ -12,7 +12,7 @@ const navbar = require('./navbar')
 module.exports = {
   base: '/blog',
   title: '一点一木前端进阶',
-  description: '高级前端进阶之路',
+  description: '一点一木的网站，专注与前端技术的分享！',
   logo: '/images/hero.png',
   head: [
     ['link', {

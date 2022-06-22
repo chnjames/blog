@@ -1,4 +1,1 @@
----
-title: Future
-issueId: 228
----
+诗与远方
