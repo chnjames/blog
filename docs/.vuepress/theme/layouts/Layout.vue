@@ -4,7 +4,7 @@ import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue'
 <template>
   <ParentLayout>
     <template #sidebar-bottom>
-      <weather />
+      <!-- <weather /> -->
     </template>
   </ParentLayout>
 </template>
