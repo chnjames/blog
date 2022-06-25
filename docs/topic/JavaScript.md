@@ -266,3 +266,37 @@ const p = Promise.all([p1, p2, p3])
 - `reduce / reduceRight(fn(prev, cur), defaultPrev)`：两两执行，`prev`为上次化简函数的`return`值，`cur`为当前值
   - 当传入`defaultPrev`时，从第一项开始
   - 当未传入时，则为第二项
+
+## `script`标签中`defer`和`async`的区别
+
+- `script`：会阻碍`HTML`解析，只有下载好并执行完脚本才会继续解析`HTML`。
+
+  ![script](https://raw.githubusercontent.com/chnjames/cloudImg/main/blog/202206251639337.svg)
+
+- `script async`：解析`HTML`过程中进行脚本的异步下载，下载成功立马执行，有可能会阻断`HTML`的解析。
+
+  ![script-async](https://raw.githubusercontent.com/chnjames/cloudImg/main/blog/202206251643291.svg)
+
+- `script defer`：完全不会阻碍`HTML`的解析，解析完成之后再按照顺序执行脚本。
+
+  ![script-defer](https://raw.githubusercontent.com/chnjames/cloudImg/main/blog/202206251644746.svg)
+
+> `defer`和`async`特性仅适用于外部脚本。
+>
+> 如果`<script>`脚本没有`src`，则会忽略`defer`和`async`特性。
+
+### 总结
+
+`async`和`defer`共同点：加载脚本都不会阻塞页面的渲染。
+
+区别：
+
+|         | 顺序                                                         | `DOMContentLoaded`                                           |
+| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `async` | **加载优先顺序**。脚本在文档中的顺序不重要---先加载完成的先执行 | 不相关。可能在文档加载完成前加载并执行完毕。如果脚本很小或来自于缓存，同时文档足够长，就会发生这种情况。 |
+| `defer` | **文档顺序**（它们在文档中的顺序）                           | 在文档加载和解析完成之后（如果需要，则会等待），即在`DOMContentLoaded`之前执行。 |
+
+在实际开发中，`defer`用于需要整个`DOM`的脚本和脚本的相对执行顺序很重要的时候。`async`用于独立脚本，例如计数器或广告，这些脚本的相对执行顺序无关紧要。
+
+> 如果你使用的是`defer`或`async`，那么用户将在脚本加载完成之前先看到页面。在这种情况下，某些图形组件可能尚未初始化完成。因此，请记得添加一个“正在加载”的提示，并禁用尚不可用的按钮。以让用户可以清楚地看到，他现在可以在页面上做什么，以及还有什么是正在准备中的。
+
