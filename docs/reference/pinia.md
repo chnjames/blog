@@ -31,7 +31,9 @@ app.use(pinia)
 
 
 
-### 创建`Store`
+## `Store`
+
+### 创建`store`
 
 一个`Store`是一个实体，它持有未绑定到您的组件树的状态和业务逻辑。它托管全局状态。`Store`是使用`defineStore()`定义的，并且它需要一个唯一名称，作为第一个参数传递：
 
@@ -55,7 +57,7 @@ export const useMainStore = defineStore('main', {
 
 
 
-### 使用`Store`
+### 使用`store`
 
 ```vue
 <script setup>
@@ -162,7 +164,7 @@ store.$state = {
 
 
 
-### `Getters`
+## `Getters`
 
 `Getter`完全等同于`Store`状态的计算属性。接收`state`作为第一个参数的箭头函数使用。`getter`中的值有缓存特性，如果值没有改变，多次使用也只会调用一次。大多数情况下，`getter`只会依赖`state`，但是，他们也可能需要使用其他`getter`，所以我们可以在定义常规函数是通过`this`访问到整个`store`的实例，但是需要定义返回类型（在`TypeScript`中）。这是由于`TypeScript`中的一个已知限制，并且不会影响使用箭头函数定义的`getter`，也不会影响不使用`this`的`getter`。
 
@@ -277,7 +279,7 @@ export const useMainStore = defineStore('main', {
 
 
 
-### `Actions`
+## `Actions`
 
 `actions`相当于组件中`methods`，他们可以使用`defineStore()`中的`actions`属性定义，且非常适合定义业务逻辑。
 
@@ -311,6 +313,8 @@ export const useMainStore = defineStore('main', {
     }
 })
 ```
+
+
 
 #### 访问其他`store`操作
 
