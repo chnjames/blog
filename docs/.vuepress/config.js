@@ -5,7 +5,6 @@ const { registerComponentsPlugin } = require('@vuepress/plugin-register-componen
 const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 const { viteBundler } = require('@vuepress/bundler-vite')
 const { path } = require('@vuepress/utils')
-const { localTheme } = require('./theme')
 const sidebar = require('./sidebar')
 const navbar = require('./navbar')
 
@@ -90,7 +89,7 @@ module.exports = {
       }
     })
   ],
-  theme: localTheme({
+  theme: defaultTheme({
     // page meta
     editLinkText: '在 GitHub 上编辑此页',
     contributorsText: '贡献者',
