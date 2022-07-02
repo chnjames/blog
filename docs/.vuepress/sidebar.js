@@ -4,7 +4,9 @@ module.exports = {
         '/reference/base.md',
         '/reference/experience.md',
         '/reference/vue3.md',
-        '/reference/vite_vue3_ts.md'
+        '/reference/vite_vue3_ts.md',
+        '/reference/git.md',
+        '/reference/pinia.md'
     ],
     // 面试宝典
     '/topic/': [
