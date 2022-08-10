@@ -41,10 +41,14 @@ npm i vue-awesome-swiper@4.1.1
 
 ### 引入组件，开始使用
 
+> Loop轮播偏移等问题，可以使用 `v-if`对后端返回数据进行判断：
+>
+> `v-if="list.length > 1"`
+
 ```vue
 <template>
   <div class="swiper">
-    <swiper ref="swiperRef" :options="swiperOption">
+    <swiper v-if="list.length > 1" ref="swiperRef" :options="swiperOption">
       <swiper-slide>Slide 1</swiper-slide>
       <swiper-slide>Slide 2</swiper-slide>
       <swiper-slide>Slide 3</swiper-slide>
@@ -64,6 +68,7 @@ npm i vue-awesome-swiper@4.1.1
     },
     data() {
       return {
+        list: [], // 存放返回数据列表
 		swiperOption: {
           effect: 'coverflow',
           centeredSlides: true,
@@ -83,11 +88,11 @@ npm i vue-awesome-swiper@4.1.1
             on: {
               // this.realIndex 当前滑块索引
               click: function () { // 监听点击滑块事件
-              console.log('this.realIndex', this.realIndex)
-            },
-            slideChange: function () {
-              console.log('this.realIndex', this.realIndex)
-            }
+              	console.log('this.realIndex', this.realIndex)
+              },
+              slideChange: function () {
+                console.log('this.realIndex', this.realIndex)
+              }
           }
         }
       }
