@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-6799399e","path":"/future/distance.html","title":"\u8BD7\u4E0E\u8FDC\u65B9","lang":"en-US","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1655881937000,"contributors":[{"name":"\u4E00\u70B9\u4E00\u6728","email":"chnrural910@gmail.com","commits":1}]},"filePathRelative":"future/distance.md"}');export{e as data};
