@@ -7,7 +7,8 @@ module.exports = {
         '/reference/vite_vue3_ts.md',
         '/reference/git.md',
         '/reference/pinia.md',
-        '/reference/canvas.md'
+        '/reference/canvas.md',
+        '/reference/dhtmlx-gantt.md'
     ],
     // 面试宝典
     '/topic/': [
