@@ -11,11 +11,11 @@
   "author": "'chnjames' <'chnrural910@gmail.com'>",
   "license": "ISC",
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-beta.45",
-    "@vuepress/plugin-docsearch": "^2.0.0-beta.45",
-    "@vuepress/plugin-nprogress": "^2.0.0-beta.45",
-    "@vuepress/plugin-register-components": "^2.0.0-beta.45",
-    "vuepress": "^2.0.0-beta.39",
+    "@vuepress/bundler-vite": "^2.0.0-beta.51",
+    "@vuepress/plugin-docsearch": "^2.0.0-beta.51",
+    "@vuepress/plugin-nprogress": "^2.0.0-beta.51",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.51",
+    "vuepress": "2.0.0-beta.51",
     "vuepress-theme-vue": "^1.1.1"
   },
   "repository": "https://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@github.com/chnjames/chnjames.git",
